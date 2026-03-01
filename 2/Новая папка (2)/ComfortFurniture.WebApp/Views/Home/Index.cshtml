@@ -1,0 +1,47 @@
+@model DashboardSummaryViewModel
+
+<section class="page-hero">
+    <div>
+        <h1>Система для отслеживания информации о продукции</h1>
+        <p>
+            Приложение реализует список продукции, добавление и редактирование карточек,
+            просмотр цехов по конкретному изделию и расчет необходимого сырья.
+        </p>
+    </div>
+    <a class="primary-button" asp-controller="Products" asp-action="Index">Открыть список продукции</a>
+</section>
+
+<section class="summary-grid">
+    <article class="summary-card">
+        <span class="summary-value">@Model.ProductCount</span>
+        <span class="summary-label">позиций продукции</span>
+    </article>
+    <article class="summary-card">
+        <span class="summary-value">@Model.WorkshopCount</span>
+        <span class="summary-label">цехов в справочнике</span>
+    </article>
+    <article class="summary-card">
+        <span class="summary-value">@Model.MaterialTypeCount</span>
+        <span class="summary-label">типов материалов</span>
+    </article>
+</section>
+
+<section class="feature-grid">
+    <article class="feature-card">
+        <h2>Продукция</h2>
+        <p>Отображение списка товаров из SQLite, расчет общего времени изготовления и переход на редактирование.</p>
+        <a class="secondary-link" asp-controller="Products" asp-action="Index">Перейти</a>
+    </article>
+
+    <article class="feature-card">
+        <h2>Цеха производства</h2>
+        <p>Для каждой позиции выводится список цехов, количество сотрудников и время изготовления в цехе.</p>
+        <a class="secondary-link" asp-controller="Products" asp-action="Index">Открыть через карточку продукта</a>
+    </article>
+
+    <article class="feature-card">
+        <h2>Калькулятор сырья</h2>
+        <p>Реализован метод, который возвращает целое количество сырья с учетом коэффициента типа и потерь материала.</p>
+        <a class="secondary-link" asp-controller="Materials" asp-action="Index">Рассчитать</a>
+    </article>
+</section>
