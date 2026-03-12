@@ -1,0 +1,56 @@
+@model ProductEditorViewModel
+
+<section class="single-card form-card">
+    <div class="page-header-inline">
+        <div>
+            <h1>@Model.PageTitle</h1>
+            <p>Заполните обязательные поля и сохраните изменения.</p>
+        </div>
+        <a class="outline-button" asp-action="Index">Назад</a>
+    </div>
+
+    <form asp-action="@(Model.ProductId.HasValue ? "Edit" : "Create")" method="post" class="data-form">
+        @Html.AntiForgeryToken()
+        <input asp-for="ProductId" type="hidden" />
+
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+        <div class="form-grid">
+            <div class="form-field">
+                <label asp-for="Article"></label>
+                <input asp-for="Article" class="text-input" />
+                <span asp-validation-for="Article" class="field-error"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="ProductTypeId"></label>
+                <select asp-for="ProductTypeId" asp-items="Model.ProductTypes" class="text-input">
+                    <option value="">Выберите тип продукции</option>
+                </select>
+                <span asp-validation-for="ProductTypeId" class="field-error"></span>
+            </div>
+
+            <div class="form-field form-field-wide">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="text-input" />
+                <span asp-validation-for="Name" class="field-error"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="PartnerMinPrice"></label>
+                <input asp-for="PartnerMinPrice" class="text-input" step="0.01" />
+                <span asp-validation-for="PartnerMinPrice" class="field-error"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="MaterialTypeId"></label>
+                <select asp-for="MaterialTypeId" asp-items="Model.MaterialTypes" class="text-input">
+                    <option value="">Выберите материал</option>
+                </select>
+                <span asp-validation-for="MaterialTypeId" class="field-error"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="primary-button">@Model.SubmitButtonText</button>
+    </form>
+</section>

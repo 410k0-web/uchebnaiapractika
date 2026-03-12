@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Комфорт</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo.png" alt="Логотип Комфорт" class="brand-logo" />
+                <div class="brand-text">
+                    <span class="brand-title">Комфорт</span>
+                    <span class="brand-subtitle">Подсистема работы с продукцией</span>
+                </div>
+            </a>
+
+            <nav class="main-nav">
+                <a asp-controller="Home" asp-action="Index">Главная</a>
+                <a asp-controller="Products" asp-action="Index">Продукция</a>
+                <a asp-controller="Materials" asp-action="Index">Калькулятор сырья</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-body">
+        @if (TempData["StatusMessage"] is string statusMessage && !string.IsNullOrWhiteSpace(statusMessage))
+        {
+            <div class="status-banner">@statusMessage</div>
+        }
+
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            Демо-проект для Visual Studio 2022 • SQLite • ASP.NET Core MVC
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

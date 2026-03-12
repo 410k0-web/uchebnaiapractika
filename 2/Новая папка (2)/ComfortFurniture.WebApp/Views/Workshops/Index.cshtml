@@ -1,0 +1,47 @@
+@model ProductWorkshopsPageViewModel
+
+<section class="single-card">
+    <div class="page-header-inline">
+        <div>
+            <h1>Цеха для продукции</h1>
+            <p><strong>@Model.ProductName</strong></p>
+        </div>
+        <a class="outline-button" asp-controller="Products" asp-action="Index">Назад</a>
+    </div>
+
+    <div class="info-panel">
+        <span>Общее время изготовления:</span>
+        <strong>@Model.TotalProductionHoursRounded ч</strong>
+    </div>
+
+    @if (Model.Workshops.Count == 0)
+    {
+        <p>Для этого продукта пока не назначены цеха.</p>
+    }
+    else
+    {
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Название цеха</th>
+                        <th>Тип цеха</th>
+                        <th>Сотрудников</th>
+                        <th>Время, ч</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Workshops)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.WorkshopType</td>
+                            <td>@item.EmployeeCount</td>
+                            <td>@item.ProductionHours.ToString("0.##", CultureInfo.GetCultureInfo("ru-RU"))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

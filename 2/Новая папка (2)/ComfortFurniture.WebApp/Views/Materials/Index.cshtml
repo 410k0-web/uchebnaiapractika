@@ -1,0 +1,67 @@
+@model MaterialCalculatorViewModel
+
+<section class="single-card form-card">
+    <div class="page-header-inline">
+        <div>
+            <h1>Калькулятор сырья</h1>
+            <p>Если переданы некорректные данные, метод возвращает -1. В интерфейсе это показывается как ошибка.</p>
+        </div>
+    </div>
+
+    <form asp-action="Index" method="post" class="data-form">
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+        <div class="form-grid">
+            <div class="form-field">
+                <label asp-for="ProductTypeId"></label>
+                <select asp-for="ProductTypeId" asp-items="Model.ProductTypes" class="text-input">
+                    <option value="">Выберите тип продукции</option>
+                </select>
+                <span asp-validation-for="ProductTypeId" class="field-error"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="MaterialTypeId"></label>
+                <select asp-for="MaterialTypeId" asp-items="Model.MaterialTypes" class="text-input">
+                    <option value="">Выберите тип материала</option>
+                </select>
+                <span asp-validation-for="MaterialTypeId" class="field-error"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="ProductCount"></label>
+                <input asp-for="ProductCount" class="text-input" />
+                <span asp-validation-for="ProductCount" class="field-error"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Parameter1"></label>
+                <input asp-for="Parameter1" class="text-input" step="0.01" />
+                <span asp-validation-for="Parameter1" class="field-error"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Parameter2"></label>
+                <input asp-for="Parameter2" class="text-input" step="0.01" />
+                <span asp-validation-for="Parameter2" class="field-error"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="primary-button">Рассчитать</button>
+    </form>
+
+    @if (Model.Result.HasValue)
+    {
+        <div class="result-panel">
+            <span>Необходимое количество сырья:</span>
+            <strong>@Model.Result.Value</strong>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.Message))
+    {
+        <p class="helper-text">@Model.Message</p>
+    }
+</section>
